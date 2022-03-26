@@ -10,20 +10,13 @@ for i in range(n):
 
 # print(lst)
 
-def rotate_matrix_90_degree():
+def rotate_90():
     global lst
-    row = len(lst)
-    col = len(lst[0])
-
-    res = [[0] * row for _ in range(col)]
-    for r in range(row):
-        for c in range(col):
-            res[c][row-1-r] = lst[r][c]
-    lst = res
+    lst = list(map(list, zip(*lst[::-1])))
 
 def rotate_reverse():
     global lst
-    lst =  list(map(list, zip(*lst)))[::-1]
+    lst = list(map(list, zip(*lst)))[::-1]
 
 # print()
 
@@ -40,8 +33,6 @@ def left():
         chk = [False for _ in range(n)]
         for j in range(0,n-1):
             k = j + 1
-
-
             if lst[i][j] == lst[i][k] and chk[j] is False and chk[k] is False:
                 lst[i][j] += lst[i][k]
                 lst[i][k] = 0
@@ -54,12 +45,11 @@ def left():
                 cnt += 1
             for u in range(cnt):
                 lst[i].append(0)
-    # print("left")
     return
 
 def right():
-    rotate_matrix_90_degree()
-    rotate_matrix_90_degree()
+    rotate_90()
+    rotate_90()
     left()
     rotate_reverse()
     rotate_reverse()
@@ -67,9 +57,9 @@ def right():
     return
 
 def up():
-    rotate_matrix_90_degree()
-    rotate_matrix_90_degree()
-    rotate_matrix_90_degree()
+    rotate_90()
+    rotate_90()
+    rotate_90()
     left()
     rotate_reverse()
     rotate_reverse()
@@ -78,7 +68,7 @@ def up():
     return
 
 def down():
-    rotate_matrix_90_degree()
+    rotate_90()
     left()
     rotate_reverse()
     # print("down")
